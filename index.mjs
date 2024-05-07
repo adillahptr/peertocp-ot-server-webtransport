@@ -166,9 +166,9 @@ io.on("connection", (socket) => {
         callback(true)
       })
 
-      socket.on("sendToPrivate", (data) => {
+      socket.on("sendToPrivate", (data, callback) => {
         sendToPeer(data.to, data.channel, data.message)
-        return true;
+        callback(true)
       })
     }
   })
