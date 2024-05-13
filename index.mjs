@@ -8,8 +8,8 @@ import { Http3Server } from "@fails-components/webtransport";
 
 const idToDoc = new Map();
 
-const key = readFileSync("./key.pem");
-const cert = readFileSync("./cert.pem");
+const key = readFileSync("./private.key");
+const cert = readFileSync("./certificate.crt");
 
 class Doc {
   constructor(docName, namespace, notifyNewPeers, sendToPeer) {
