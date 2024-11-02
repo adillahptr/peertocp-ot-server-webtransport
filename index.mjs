@@ -35,7 +35,8 @@ const server = createServer({key, cert}, (request, response) => {
 })
 
 const io = new Server(server, {
-  transports: ["polling", "websocket", "webtransport"]
+  transports: ["polling", "websocket", "webtransport"],
+  upgradeTimeout: 30000
 });
 
 
@@ -117,7 +118,7 @@ const getDoc = (docname) => setIfUndefined(docs, docname, () => {
 
 io.on("connection", (socket) => {
   socket.conn.on("upgrade", (transport) => {
-    console.log(`transport upgraded to ${transport.name}`);
+    console.log(`${Date.now()} transport upgraded to ${transport.name} ${socket.id}`);
     if (transport.name === 'webtransport'){
       const docName = socket.handshake.query.docName
 
@@ -134,12 +135,13 @@ io.on("connection", (socket) => {
 
       doc.notifyNewPeers(docName)
 
-      socket.on("disconnect", () => {
+      socket.on("disconnect", (reason) => {
         const docName = idToDoc.get(socket.id)
         idToDoc.delete(socket.id)
         const doc = getDoc(docName)
         doc.peerInfo.delete(socket.id)
         doc.notifyNewPeers(docName)
+        console.log(reason)
       })
 
       socket.on("getPeers", (data, callback) => {

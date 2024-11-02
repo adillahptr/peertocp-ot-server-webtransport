@@ -20,10 +20,10 @@
   "dependencies": {
     "@codemirror/collab": "^6.0.0",
     "@codemirror/state": "^6.1.2",
+    "@fails-components/webtransport": "^1.1.4",
+    "@fails-components/webtransport-transport-http3-quiche": "file:webtransport-transport-http3-quiche-1.1.4.tgz",
     "codemirror": "^6.0.1",
     "lib0": "^0.2.52",
-    "socket.io": "^4.7.5",
-    "@fails-components/webtransport": "^1.0.11",
-    "@fails-components/webtransport-transport-http3-quiche": "^1.0.11"
+    "socket.io": "^4.7.5"
   }
 }
