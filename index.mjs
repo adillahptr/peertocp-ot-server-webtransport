@@ -172,6 +172,8 @@ io.on("connection", (socket) => {
         sendToPeer(data.to, data.channel, data.message)
         callback(true)
       })
+    } else {
+      setTimeout(() => {socket.emit("goReconnect", "")}, 10000)
     }
   })
 })
